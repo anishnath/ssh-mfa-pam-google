@@ -1,9 +1,25 @@
-# ssh-mfa-pam-google
+# ssh 2mfa pam google
 SSH 2FA AUTH With Google PAM
 
-# Install Google Authenticator PAM
+## Install Google Authenticator PAM
 ```
 sudo apt-get install libpam-google-authenticator -y
+```
+
+## Edit the file and Add the Following
+```
+vim /etc/pam.d/sshd
+
+auth required pam_google_authenticator.so nullok
+```
+
+## Enable the PAM Module in the ssh_config
+
+```
+vim /etc/ssh/sshd_config
+# Change to yes to enable challenge-response passwords (beware issues with
+# some PAM modules and threads)
+ChallengeResponseAuthentication yes
 ```
 
 
